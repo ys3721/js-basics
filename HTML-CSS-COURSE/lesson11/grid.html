@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid My Practice</title>
+        <link rel="stylesheet" href="css/grid.css">
+    </head>
+    <body>
+        <div style="
+        display: grid;
+        grid-template-columns: 100px 100px;
+        ">
+            <div style="background-color: lightblue;">
+                div 1
+            </div>
+            <div style="background-color: pink;">
+                div 2
+                <p>Paragraph</p>
+            </div>
+        </div>
+
+        <div style="
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 100px 200px 300px;
+        ">
+            <div style="background-color: lightblue;">
+                div 1 100px
+            </div>
+            <div style="background-color: pink;">
+                div 2 200px
+                <p>Paragraph</p>
+            </div>
+            <div style="background-color: lightblue;">
+                div 3 300px
+            </div>
+            <div style="background-color: pink;">
+                div 4
+            </div>
+        </div>
+
+        <div style="
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        ">
+            <div style="background-color: lightblue;">
+                div 1 100px
+            </div>
+            <div style="background-color: pink;">
+                div fr
+                <p>fr</p>
+            </div>
+        </div>
+
+        <div style="
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 100px 1fr 2fr;
+        ">
+            <div style="background-color: lightblue;">
+                div 1 100px
+            </div>
+            <div style="background-color: pink;">
+                div fr
+            </div>
+            <div style="background-color: burlywood;">
+                div 2fr
+            </div>
+        </div>
+
+        <div style="
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 10px;
+        row-gap:20px;
+        ">
+            <div style="background-color: lightblue; height: 200px;">
+                div fr
+            </div>
+            <div style="background-color: pink;">
+                div fr
+            </div>
+            <div style="background-color: burlywood;">
+                div 2fr
+            </div>
+
+            <div style="background-color: gray;">
+                div fr
+            </div>
+            <div style="background-color: lightcyan;">
+                div fr
+            </div>
+            <div style="background-color: lightgreen;">
+                div 2fr
+            </div>
+        </div>
+    
+    </body>
+</html>
