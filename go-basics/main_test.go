@@ -3,13 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/panjf2000/ants/v2"
 	"math"
 	"math/rand"
 	"runtime"
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/panjf2000/ants/v2"
+	"ys3721.com/basic/reflectbasic"
 )
 
 func BenchmarkGoAdd(b *testing.B) {
@@ -533,4 +535,13 @@ func player(id int32, c chan func()) {
 
 func TestBeginTest(t *testing.T) {
 	beginTest()
+}
+
+func TestPrintTypeAndValue(t *testing.T) {
+	reflectbasic.PrintTypeAndValue(1)
+	reflectbasic.PrintTypeAndValue("hello world")
+}
+
+func TestChangePersonAge(t *testing.T) {
+	reflectbasic.ChangePersonAge(11)
 }
