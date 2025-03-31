@@ -84,8 +84,9 @@ func TestChangePrivateFamelField() {
 }
 
 func PrintStructInfo(obj any) {
-	// objType := reflect.TypeOf(&obj)
-	// objValue := reflect.ValueOf(&obj)
+	objType := reflect.TypeOf(&obj)
+	objValue := reflect.ValueOf(&obj)
 
-	// fmt.Println(objType.Field())
+	fmt.Println(objType.NumField())
+	fmt.Println(objValue)
 }
