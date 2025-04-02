@@ -15,9 +15,18 @@ func PrintTypeAndValue(any interface{}) {
 }
 
 type Person struct {
-	name  string
-	age   int
-	famel bool
+	name   string
+	age    int
+	famel  bool
+	params map[int32]string
+}
+
+type ICanSay interface {
+	Say(string)
+}
+
+func (person Person) Say(v string) {
+	fmt.Println("person say ", v)
 }
 
 func ChangePersonAge(age int) {
@@ -84,8 +93,61 @@ func TestChangePrivateFamelField() {
 }
 
 func PrintStructInfo(obj any) {
-	// objType := reflect.TypeOf(&obj)
+	objType := reflect.TypeOf(obj)
+	if objType.Kind() != reflect.Struct {
+		fmt.Println("obj is not a struct")
+		return
+	}
+	//取objType的元素类型
+	for i := 0; i < objType.NumField(); i++ {
+		field := objType.Field(i)
+		fmt.Printf("Field Name: %s, Type: %s\n", field.Name, field.Type)
+	}
+
 	// objValue := reflect.ValueOf(&obj)
 
 	// fmt.Println(objType.Field())
+}
+
+func (p Person) String() string {
+	return fmt.Sprintf("Person{name:%s, age:%d, famel:%t}", p.name, p.age, p.famel)
+}
+
+func (p Person) SayHello(greet string) string {
+	return fmt.Sprintf("Hello,%s %s !", greet, p.name)
+}
+
+func CallMethod(obj interface{}, methodName string, args ...interface{}) {
+	objValue := reflect.ValueOf(obj)
+	method := objValue.MethodByName(methodName)
+	if method.IsValid() {
+		in := make([]reflect.Value, len(args))
+		for i, arg := range args {
+			in[i] = reflect.ValueOf(arg)
+		}
+		results := method.Call(in)
+		for _, result := range results {
+			fmt.Println("result:", result)
+		}
+	}
+}
+
+func useCallMethod() {
+	p := Person{
+		name:  "John",
+		age:   30,
+		famel: true,
+	}
+	CallMethod(p, "SayHello", "World")
+}
+
+func PrintType(value interface{}) {
+	switch value.(type) {
+	case ICanSay:
+		fmt.Println("I Can Say")
+	case int:
+		fmt.Println("int")
+	default:
+		fmt.Println("do not know")
+	}
 }
