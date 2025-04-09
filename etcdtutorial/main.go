@@ -52,3 +52,37 @@ func main() {
 	}
 
 }
+
+func RegisterService(etchEndpoints []string, serviceKey string, serviceValue string, ttl int64) error {
+	cli, err := clientv3.New(clientv3.Config{
+		Endpoints:   etchEndpoints,
+		DialTimeout: 5 * time.Second,
+	})
+	if err != nil {
+		return err
+	}
+	leaseResp, err := cli.Grant(context.Background(), ttl)
+	if err != nil {
+		return err
+	}
+	ch, err := cli.KeepAlive(context.Background(), leaseResp.ID)
+	if err != nil {
+		return err
+	}
+	_, err = cli.Put(context.Background(), serviceKey, serviceValue, clientv3.WithLease(leaseResp.ID))
+	if err != nil {
+		return err
+	}
+
+	go func() {
+		for {
+			ka := <-ch
+			if ka == nil {
+				fmt.Println("keep alive channel closed")
+				break
+			}
+			fmt.Println("keep alive:", ka)
+		}
+	}()
+	return nil
+}

@@ -68,12 +68,12 @@ func addAndRemovePlugs() {
 			}
 		}
 	}()
-	p1 := PluginImpl1{}
+	p1 := &PluginImpl1{}
 	plugins[p1.String()] = p1
 	time.Sleep(time.Microsecond * 200)
-	p2 := PluginImpl2{}
+	p2 := &PluginImpl2{}
 	plugins[p2.String()] = p2
-	p3 := PluginImpl3{}
+	p3 := &PluginImpl3{}
 	plugins[p3.String()] = p3
 
 	time.Sleep(time.Second * 10)

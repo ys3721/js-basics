@@ -25,3 +25,7 @@ func TestPrintType(t *testing.T) {
 func TestAddPlugins(t *testing.T) {
 	addAndRemovePlugs()
 }
+
+func TestBasicRoleToken(t *testing.T) {
+	doReflectTypeNewMain()
+}
